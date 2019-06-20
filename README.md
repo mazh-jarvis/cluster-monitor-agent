@@ -3,7 +3,9 @@ What does this project do? Cluster Monitor Agent is an internal tool
 that monitors the cluster resources.. it helps the infrastructure team to..
 
 ## Architecture and Designx
-1) Draw a cluster digram with three Linux hosts, a DB, and agents
+1) Cluster digram with three Linux hosts, a DB, and agents:
+
+![](images/cma_arch_diagram.png)
 
 2) Describe tables (no SQL code, just exaplain usage)
 
