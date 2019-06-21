@@ -1,12 +1,13 @@
-drop table if exists public.host_info;
+drop table if exists public.host_info cascade;
 create table public.host_info
 (
-	id					serial not null,
+	id				serial not null,
 	hostname			varchar not null,
 	cpu_number			int2 not null,
-	cpu_architecture	varchar not null,
+	cpu_architecture		varchar not null,
 	cpu_model			varchar not null,
 	cpu_mhz				float8 not null,
+	l2_cache			int4 not null,
 	"timestamp"			timestamp null,
 	total_mem			int4 null,
 	CONSTRAINT host_info_pk	primary key (id),
@@ -14,7 +15,7 @@ create table public.host_info
 );
 
 -- WAR: copied from above
-drop table if exists public.host_usage; 
+drop table if exists public.host_usage cascade; 
 create table public.host_usage
 (
 	"timestamp"			timestamp null,
