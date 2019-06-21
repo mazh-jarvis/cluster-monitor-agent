@@ -17,12 +17,11 @@ l2_cache=`lscpu | egrep -i "l2" | awk '{print $3}'`
 timestamp=`date +"+x +X"`
 total_mem=`cat /proc/meminfo | grep -i memtotal`
 
-
 # connect to db
 db_insert="""insert into host_info (hostname, cpu_number, cpu_architecture,
 	cpu_model, cpu_mhz, l2_cache, "timestamp", total_mem) 
-	VALUES($hostname, $cpu_number, $cpu_architecture,
-	$cpu_model, $cpu_mhz, $l2_cache, $timestamp, $total_mem)"""
+	VALUES('$hostname', $cpu_number, '$cpu_architecture',
+	'$cpu_model', $cpu_mhz, $l2_cache, '$timestamp', $total_mem)"""
 
 export PGPASSWORD=$password
 psql -h "$db_host" -p "$port" -U "$db_user" -d "$db" -c "$db_insert"
