@@ -1,5 +1,4 @@
 drop table public.host_info
-
 create table public.host_info
 (
 	id					serial not null,
@@ -14,8 +13,9 @@ create table public.host_info
 	CONSTRAINT host_info_un unique (hostname)
 );
 
--- COPIED from above
-create table public.host_info
+-- WAR: copied from above
+drop table public.host_usage
+create table public.host_usage
 (
 	"timestamp"			timestamp null,
 	host_id				serial not null,
