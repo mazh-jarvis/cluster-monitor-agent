@@ -1,4 +1,4 @@
-drop table public.host_info
+drop table if exists public.host_info;
 create table public.host_info
 (
 	id					serial not null,
@@ -14,7 +14,7 @@ create table public.host_info
 );
 
 -- WAR: copied from above
-drop table public.host_usage
+drop table if exists public.host_usage; 
 create table public.host_usage
 (
 	"timestamp"			timestamp null,
