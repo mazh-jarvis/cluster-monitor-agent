@@ -13,10 +13,14 @@ that monitors the cluster resources.. it helps the infrastructure team to..
 
 ## Usage
 1) how to init database and tables
-2) `host_info.sh` usage:
+2) "host_info" usage:
+
 `./host_info.sh localhost 5432 host_agent postgres password`
-3) `host_usage.sh` usage:
+
+3) "host_usage" usage:
+
 `./host_usage.sh localhost 5432 host_agent postgres password`
+
 4) `crontab` setup:
 `*/1 * * * * /home/centos/dev/jrvs/bootcamp/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log`
 
