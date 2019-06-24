@@ -20,6 +20,10 @@ total_mem=`cat /proc/meminfo | grep -i memtotal | awk '{print $2}'`
 
 # connect to db
 export PGPASSWORD=$password
+#id=`psql -h "$db_host" -p "$port" -U "$db_user" -d "$db" -c "select MAX(id, 0) from host_info;" `
+host_id=`psql -h "$db_host" -p "$port" -U "$db_user" -d "$db" -c "select id from host_info;" | egrep -o -m1 "[0-9]+"`
+#echo host id is: $host_id;
+echo $host_id > host_id
 db_insert="""insert into $db_table (hostname, cpu_number, cpu_architecture,
 	cpu_model, cpu_mhz, l2_cache, "timestamp", total_mem) 
 	VALUES('$hostname', $cpu_number, '$cpu_architecture',
