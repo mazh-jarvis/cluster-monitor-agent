@@ -13,14 +13,17 @@ that monitors the cluster resources.. it helps the infrastructure team to..
 
 ## Usage
 1) how to init database and tables
-2) `host_info.sh` usage
-3) `host_usage.sh` usage
-4) `crontab` setup
+2) `host_info.sh` usage:
+`./host_info.sh localhost 5432 host_agent postgres password`
+3) `host_usage.sh` usage:
+`./host_usage.sh localhost 5432 host_agent postgres password`
+4) `crontab` setup:
+`*/1 * * * * /home/centos/dev/jrvs/bootcamp/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log`
 
 ## Improvements
-Write at least 3 things you want to improve
-e.g.
+Write at least 3 things you want to improve:
 1) handle hardware update
-...
-
+2) handle exceptions
+3) redirect standard error
+4) allow user to add additional attributes
 
