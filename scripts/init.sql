@@ -18,8 +18,8 @@ create table public.host_info
 drop table if exists public.host_usage cascade; 
 create table public.host_usage
 (
-	"timestamp"			timestamp null,
 	host_id				serial not null,
+	"timestamp"			timestamp null,
 	memory_free			int4 not null,
 	cpu_idle			int2 not null,
 	cpu_kernel			int2 not null,

@@ -1,28 +1,26 @@
 #!/bin/bash
 # Script usage
-# ./host_info.sh localhost 5432 host_agent postgres password
+# ./host_usage.sh localhost 5432 host_agent postgres password
+db_host=$1
+port=$2
 db=$3
 db_user=$4
 password=$5
+db_table='host_usage'
 
-# Get specs
-hostname=`hostname -f`
-cpu_number=`lscpu | egrep "^CPU\S"`
-cpu_architecture=`lscpu | grep "Arch" | awk '{print $3}'`
-cpu_model=`lscpu | grep -i "model name" | awk '{print $3}'`
-cpu_mhz=`lscpu | egrep -i "cpu mhz" | egrep -o "[0-9]+\.[0-9]+"`
-l2_cache=`lscpu | egrep -i "l2" | awk '{print $3}'`
-timestamp=`date +"+x +X"`
-total_mem=`cat /proc/meminfo | grep -i memtotal`
-
+# Get status
+timestamp=`date +"%x %X"`
+#host_id=
+memory_free=` free -m | grep "^Mem" | awk '{print $2}' `
+cpu_idle=` vmstat | awk 'NR == 3' | awk '{print $15}' `
+cpu_k=` vmstat | awk 'NR == 3' | awk '{print $14}' `
+disk_io=` vmstat | awk 'NR == 3' | awk '{print $10}' `
+disk_av=` df -lm | head -n5 | grep "/$" | awk '{print $4}' `
 
 # connect to db
-db_command="""insert into host_info (hostname, cpu_number, cpu_architecture,
-	cpu_model, cpu_mhz, l2_cache, "timestamp", total_mem) 
-	VALUES($hostname, $cpu_number, $cpu_architecture,
-	$cpu_model, $cpu_mhz, $l2_cache, $timestamp, $total_mem)"""
+db_insert="""insert into host_usage (timestamp, memory_free, cpu_idle,
+	cpu_kernel, disk_io, disk_available) 
+	VALUES($timestamp, $memory_free, $cpu_idle, $cpu_k, $disk_io, $disk_av)"""
 
-psql -h "$hostname" -p "$password" -U "$db_user" -d "$db" -c "$db_command"
-#sleep 1
-
-
+psql -h "$db_host" -p "$port" -U "$db_user" -d "$db" -c "$db_insert"
+sleep 1
