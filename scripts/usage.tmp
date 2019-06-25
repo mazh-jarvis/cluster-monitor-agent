@@ -1,3 +1,0 @@
-./host_info.sh localhost 5432 host_agent postgres password
-psql -h localhost -d host_agent -U postgres -W -c delete from host_info;
-psql -h localhost -d host_agent -U postgres -W -c select * from host_info;
